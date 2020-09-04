@@ -107,6 +107,7 @@ class HMRServer {
   broadcast(msg) {
     const json = JSON.stringify(msg);
     for (let ws of this.wss.clients) {
+      if (ws.readyState !== WebSocket.OPEN) continue;
       ws.send(json);
     }
   }
